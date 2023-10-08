@@ -66,3 +66,31 @@ let greeting= currentHour <5 ? 'Night':
 }
 
 greetEle.textContent=getGreetingMsg(currentHour)
+
+
+// showing date on home page
+
+
+// Assuming currentdateElem represents an HTML element, make sure it's properly selected first
+let currentdateElem = document.querySelector(".text.text-body-medium");
+
+// Check if the element exists before setting its textContent
+if (currentdateElem) {
+    var currentDate = new Date();
+    
+    // Options for formatting the date
+    let options = {
+        weekday: 'short', // Short day name (e.g., "Sun")
+        month: 'short',   // Short month name (e.g., "Oct")
+        day: '2-digit',   // 2-digit day (e.g., "08")
+        year: 'numeric'   // 4-digit year (e.g., "2023")
+    };
+    
+    let formattedDate = currentDate.toLocaleDateString(undefined, options);
+    
+    currentdateElem.textContent = formattedDate;
+} else {
+    console.error("Element not found or does not exist.");
+}
+
+
