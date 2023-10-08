@@ -1,6 +1,12 @@
 // Module import
 
-import { addEventOnElements } from "./utils";
+// import { addEventOnElements } from "./utilss";
+
+
+
+// import { addEventOnElements } from "./utils";
+
+
 
 
 
@@ -9,10 +15,19 @@ import { addEventOnElements } from "./utils";
 
 let sidebar= document.querySelector('[data-sidebar]')
 
-let sidebarTogglers=document.querySelector('[data-sidebar-toggler]');
+let sidebarTogglers=document.querySelectorAll('[data-sidebar-toggler]');
 
 let overlay=document.querySelector('[data-sidebar-overlay]')
 
+
+
+
+
+let addEventOnElements = function(elements,eventType,callback){
+    console.log(elements);
+
+    elements.forEach(element=>element.addEventListener(eventType,callback))
+}
 
 
 

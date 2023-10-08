@@ -1,4 +1,3 @@
-
 /**@param {Array<HTMLElements>} elements   ===>an array of DOM elements
 
 @param {string}  eventType ==>type of event to listen
@@ -6,6 +5,7 @@
 @param {Function} callback ==>function to be excuted when called (Event occurs)
 
 **/
+
 
 
 
