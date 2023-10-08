@@ -43,7 +43,6 @@ let greetEle = document.querySelector('[data-greeting]');
 
 let currentHour = new Date().getHours()
 
-greetEle.textContent=getGreetingMsg()
 
 
 
@@ -55,5 +54,15 @@ greetEle.textContent=getGreetingMsg()
 */
 
 let getGreetingMsg =function (currentHour){
+let greeting= currentHour <5 ? 'Night':
+            currentHour <12 ? 'Morning' :
+            currentHour < 15 ? 'Noon':
+            currentHour < 17 ? 'Afternoon':
+            currentHour < 20 ? 'Evening':
+            'Night'
 
+
+            return `Hey ! Good ${greeting}`
 }
+
+greetEle.textContent=getGreetingMsg(currentHour)
