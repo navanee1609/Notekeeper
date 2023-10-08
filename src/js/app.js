@@ -1,7 +1,4 @@
 
-// import 
-
-// import { Tooltip } from "./components/Tooltip";
 
 // toggle sidebar in small screen
 
