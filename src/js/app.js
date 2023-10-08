@@ -161,3 +161,69 @@ tooltipElems.forEach((elem) => Tooltip(elem));
 
 
 
+// Notebook create field
+
+let sidebarList = document.querySelector('[data-sidebar-list]');
+let addNotebookBtn = document.querySelector('[data-add-notebook]');
+let lastActiveNavItem = null; // Keep track of the last active item
+
+/* button click => add new note created*/
+
+let showNotebookField = function () {
+    let navItem = document.createElement('div');
+    navItem.classList.add('nav-item');
+    navItem.innerHTML = `
+        <span class="text text-label-large" data-notebook-field></span>
+        <div class="state-layer"> </div>
+    `;
+
+    navItem.addEventListener('click', activeNotebook);
+
+    sidebarList.appendChild(navItem);
+
+    let navItemField = navItem.querySelector('[data-notebook-field]');
+
+    // Function to activate the clicked notebook and deactivate the last one
+    function activeNotebook() {
+        if (lastActiveNavItem) {
+            lastActiveNavItem.classList.remove('active');
+        }
+        navItem.classList.add('active');
+        lastActiveNavItem = navItem;
+    }
+
+    activeNotebook(); // Activate the newly created notebook
+
+
+    // maake notyebook content editablea nd focus
+
+
+    let makeElemEditable=function(element){
+        element.setAttribute('contenteditable',true);
+        element.focus()
+    }
+
+    makeElemEditable(navItemField)
+
+    navItemField.addEventListener('keydown',createNotebook)
+
+}
+
+
+
+
+
+addNotebookBtn.addEventListener('click', showNotebookField);
+
+
+function createNotebook(event){
+    if(event.key==='Enter'){
+    
+        // store new csreated in database
+
+    }
+}
+
+
+
+
