@@ -12,3 +12,9 @@
 let addEventOnElements = function(elements,eventType,callback){
 
 }
+
+
+
+export {
+    addEventOnElements
+}
