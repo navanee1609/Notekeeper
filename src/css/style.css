@@ -544,6 +544,22 @@ body{
   visibility: visible;
 }
 
+.modal-overlay{
+  z-index: 6;
+  visibility: visible;
+  animation: fade-overlay var(--tr-duration-short) var(--tr-easing-linear) forwards;
+}
+
+
+@keyframes fade-overlay{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0.5;
+  }
+}
+
 
 
 /**
@@ -705,7 +721,7 @@ body{
 
 .modal-footer{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: var(--spacing-2);
   padding-block-start: var(--spacing-2);
@@ -768,7 +784,30 @@ body{
  * Tooltip
  */
 
+ .tooltip{
+  position: fixed;
+  z-index: 4;
+  height: 24px;
+  display: grid;
+  align-items: center;
+  padding-inline:var(--spacing-2);
+  background-color: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  white-space: none;
+  border-radius: var(--radius-extra-small);
+  pointer-events: none;
+  animation: fade var(--tr-duration-short) var(--tr-easing-linear) forwards;
 
+ }
+
+ @keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+ }
 
 
 
