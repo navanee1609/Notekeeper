@@ -703,11 +703,65 @@ body{
   margin-block-end: var(--spacing-4);
 }
 
+.modal-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-block-start: var(--spacing-2);
+}
+
+.modal-footer.time{
+  flex-grow: 1;
+  color: var(--on-surface-variant);
+}
+
+
+
+  
+
 
 /**
  * Button
  */
 
+ .btn{
+  height: 40px;
+  max-width: max-content;
+  display: grid;
+  align-items: center;
+  border-radius: var(--radius-full);
+ }
+
+ .btn.text{
+  color: var(--primary);
+  --state-layer-bg:var(--primary);
+  padding-inline: var(--spacing-3);
+
+ }
+
+
+ .btn.text:disabled{
+  color: var(--on-surface);
+ }
+
+
+ .btn.text:disabled .text-label-large{
+  opacity: 0.38;
+ }
+
+ .btn.fill{
+  background-color: var(--primary);
+  color: var(--on-primary);
+  --state-layer-bbg:var(--on-primary);
+  padding-inline: var(--spacing-6);
+  transition: box-shadow var(--tr-duration-short) var(--tr-easing-linear);
+ }
+
+
+ .btn.fill:hover:not(:focus){
+  box-shadow: var(--shadow-1);
+ }
 
 
 /**
