@@ -180,7 +180,7 @@ let showNotebookField = function () {
     activeNotebook(); // Activate the newly created notebook
 
 
-    // maake notyebook content editablea nd focus
+    // make notyebook content editablea nd focus
 
 
     let makeElemEditable=function(element){
@@ -200,119 +200,86 @@ let showNotebookField = function () {
 
 addNotebookBtn.addEventListener('click', showNotebookField);
 
-// function createNotebook(event) {
-//     if (event.key === 'Enter') {
-//       let notebookData = db.post.notebook(this.textContent || 'Untitled');
-  
-//       this.parentElement.remove();
-  
-//       // Create a function to generate a notebook nav item
-//       let NavItem = function (id, name) {
-//         let navItem = document.createElement('div');
-//         navItem.classList.add('nav-item');
-//         navItem.setAttribute('data-notebook', id);
-  
-//         navItem.innerHTML = `
-//           <div class="nav-item active">
-//             <span class="text text-label-large" data-notebook-field>
-//               ${name}
-//             </span>
-//             <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
-//               <span class="material-symbols-rounded" aria-hidden="true">
-//                 Edit
-//               </span>
-//               <div class="state-layer"></div>
-//             </button>
-//             <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
-//               <span class="material-symbols-rounded" aria-hidden="true">
-//                 delete
-//               </span>
-//               <div class="state-layer"></div>
-//             </button>
-//             <div class="state-layer"></div>
-//           </div>
-//         `;
-  
-//         return navItem;
-//       };
-  
-//       let sidebarList = document.querySelector('[data-sidebar-list]');
-//       let client = {
-//         notebook: {
-//           create(notebookData) {
-//             let navItem = NavItem(notebookData.id, notebookData.name);
-//             sidebarList.appendChild(navItem);
-//           },
-//         },
-//       };
-  
-//       // Rendering nav item
-//       client.notebook.create(notebookData);
-//     }
-//   }
-  
-
-
-
-//  //   rendering nav item
-
-//  client.notebook.create(notebookData)
-
-
 function createNotebook(event) {
     if (event.key === 'Enter') {
       let notebookData = db.post.notebook(this.textContent || 'Untitled');
   
       this.parentElement.remove();
   
-      // Create a function to generate a notebook nav item
-      let NavItem = function (id, name) {
-        let navItem = document.createElement('div');
-        navItem.classList.add('nav-item');
-        navItem.setAttribute('data-notebook', id);
+
+    //   let NavItem = function (id, name) {
+    //     let navItem = document.createElement('div');
+    //     navItem.classList.add('nav-item');
+    //     navItem.setAttribute('data-notebook', id);
   
-        navItem.innerHTML = `
-          <div class="nav-item active">
-            <span class="text text-label-large" data-notebook-field>
-              ${name}
-            </span>
-            <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
-              <span class="material-symbols-rounded" aria-hidden="true">
-                Edit
-              </span>
-              <div class="state-layer"></div>
-            </button>
-            <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
-              <span class="material-symbols-rounded" aria-hidden="true">
-                delete
-              </span>
-              <div class="state-layer"></div>
-            </button>
-            <div class="state-layer"></div>
-          </div>
-        `;
+    //     navItem.innerHTML = `
+    //       <div class="nav-item active">
+    //         <span class="text text-label-large" data-notebook-field>
+    //           ${name}
+    //         </span>
+    //         <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
+    //           <span class="material-symbols-rounded" aria-hidden="true">
+    //             Edit
+    //           </span>
+    //           <div class="state-layer"></div>
+    //         </button>
+    //         <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
+    //           <span class="material-symbols-rounded" aria-hidden="true">
+    //             delete
+    //           </span>
+    //           <div class="state-layer"></div>
+    //         </button>
+    //         <div class="state-layer"></div>
+    //       </div>
+    //     `;
+
+    //     // showing tooltip on editt and delete
+
+    //     let tooltipElems=navItem.querySelectorAll('[data-tooltip]')
+
+    //     tooltipElems.forEach(elem=>Tooltip(elem))
   
-        return navItem;
-      };
+    //     return navItem;
+    //   };
   
       let sidebarList = document.querySelector('[data-sidebar-list]');
+      let notePanelTitle = document.querySelector('[data-note-panel-title]')
       let client = {
         notebook: {
           create(notebookData) {
             let navItem = NavItem(notebookData.id, notebookData.name);
             sidebarList.appendChild(navItem);
+            // activeNotebook.call(navItem);
+            notePanelTitle.textContent=notebookData.name
           },
+        //   reads & display a list of notebooks
+
+        read(notebookList){
+            notebookList.forEach((notebookData, index) => {
+                let navItem=NavItem(notebookData.id,notebookData.name);
+
+                if(index===0){
+                    // activeNotebook.call(navItem);
+                    notePanelTitle.textContent=notebookData.name
+                }
+
+                sidebarList.appendChild(navItem)
+            });
+        }
         },
       };
   
       // Rendering nav item
       client.notebook.create(notebookData);
-  
-      // Set the width of the sidebarList to 90%
-      sidebarList.style.width = '100%';
     }
   }
   
+
+//  //   rendering nav item
+
+//  client.notebook.create(notebookData)
+
+
 
 
 // store new csreated in database
@@ -376,8 +343,76 @@ let db={
 
 
 
+    },
+
+    get:{
+        // retrives all from db
+
+        notebook(){
+            readDB()
+
+            return noteKeeperDB.notebooks
+        }
     }
 }
 
 
 
+
+
+// Define a function to create a notebook item (assuming you have a NavItem function)
+function NavItem(id, name) {
+    let navItem = document.createElement('div');
+    navItem.classList.add('nav-item');
+    navItem.setAttribute('data-notebook', id);
+  
+    navItem.innerHTML = `
+      <div class="nav-item active">
+        <span class="text text-label-large" data-notebook-field>
+          ${name}
+        </span>
+        <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
+          <span class="material-symbols-rounded" aria-hidden="true">
+            Edit
+          </span>
+          <div class="state-layer"></div>
+        </button>
+        <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
+          <span class="material-symbols-rounded" aria-hidden="true">
+            delete
+          </span>
+          <div class="state-layer"></div>
+        </button>
+        <div class="state-layer"></div>
+      </div>
+    `;
+
+    // showing tooltip on editt and delete
+
+        let tooltipElems=navItem.querySelectorAll('[data-tooltip]')
+
+        tooltipElems.forEach(elem=>Tooltip(elem))
+  
+    return navItem;
+  }
+  
+  // Function to render existing notebooks
+  function renderExistedNotebook() {
+    let notebookList = db.get.notebook(); // Assuming this function returns a list of notebooks
+  
+    let sidebarList = document.querySelector('[data-sidebar-list]');
+    let notePanelTitle = document.querySelector('[data-note-panel-title]');
+  
+    notebookList.forEach((notebookData) => {
+      let navItem = NavItem(notebookData.id, notebookData.name);
+      sidebarList.appendChild(navItem);
+      notePanelTitle.textContent = notebookData.name;
+    });
+  }
+  
+  // Call the renderExistedNotebook function to render existing notebooks
+  renderExistedNotebook();
+  
+
+
+ 
