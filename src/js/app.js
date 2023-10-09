@@ -212,6 +212,24 @@ function createNotebook(event) {
         let Card=function(noteData){
             let {id,title,text,postedOn,notebookID}=noteData
 
+            let getRelativeTime = function(milliseconds) {
+                let currentTime = new Date().getTime();
+            
+                let minute = Math.floor((currentTime - milliseconds) / 1000 / 60);
+                let hour = Math.floor(minute / 60);
+                let day = Math.floor(hour / 24);
+            
+                if (minute < 1) {
+                    return 'Just now';
+                } else if (minute < 60) {
+                    return `${minute} min ago`;
+                } else if (hour < 24) {
+                    return `${hour} hour ago`;
+                } else {
+                    return `${day} day ago`;
+                }
+            };
+            
             let card=document.createElement('div')
 
             card.classList.add('card')
@@ -223,7 +241,7 @@ function createNotebook(event) {
             <p class="card-text text-body-large">${text}</p>
 
             <div class="wrapper">
-                 <span class="card-time text-label-large">${postedOn}</span>
+                 <span class="card-time text-label-large">${getRelativeTime(postedOn)}</span>
 
                  <button class="icon-btn large" aria-label = Delete note data-tooltip="Delete note">
                     <span class="material-symbols-rounded" aria-hidden="true">delete</span>
@@ -234,6 +252,7 @@ function createNotebook(event) {
             </div>
             `
 
+            Tooltip(card.querySelector('[data-tooltip]'))
             return card;
         }
 
@@ -299,6 +318,7 @@ function createNotebook(event) {
         note:{
             create(noteData){
                 let card=Card(noteData)
+                notepanel.appendChild(card)
             }
         }
       };
@@ -749,10 +769,13 @@ addEventOnElements(noteCreateBtns, 'click', function(){
 // Assuming you have a modal.onSubmit function that takes a callback
 modal.onSubmit(function (noteObj) {
     // Determine the active notebook (replace this logic with your actual implementation)
-    let activeNotebook = document.querySelector('[data-notebook].active').dataset.notebook;
+    let activeNotebook = document.querySelector('[data-notebook].active');
     let activeNotebookId = activeNotebook ? activeNotebook.dataset.notebook : null;
 
-    let noteData=db.post.notebook(activeNotebookId,noteObj)
+    let noteData=db.post.notebook(activeNotebookId,noteObj);
+
+
+    
 client.note.create(noteData)
 
   modal.close()

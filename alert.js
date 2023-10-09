@@ -1,0 +1,1 @@
+console.log('This is frokm another module page');
