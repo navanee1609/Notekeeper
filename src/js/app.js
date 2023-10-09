@@ -1,5 +1,4 @@
 
-
 // toggle sidebar in small screen
 
 
@@ -10,18 +9,18 @@ let sidebarTogglers=document.querySelectorAll('[data-sidebar-toggler]');
 let overlay=document.querySelector('[data-sidebar-overlay]')
 
 
-/**@param {Array<HTMLElements>} elements   ===>an array of DOM elements
+/**@param {Array<HTMLElements>} elements   ===>  an array of DOM elements
 
-@param {string}  eventType ==>type of event to listen
+@param {string}  eventType ==> type of event to listen
 
-@param {Function} callback ==>function to be excuted when called (Event occurs)
+@param {Function} callback ==> function to be excuted when called (Event occurs)
 
 **/
 
 
 
 let addEventOnElements = function(elements,eventType,callback){
-    console.log(elements);
+   
 
     elements.forEach(element=>element.addEventListener(eventType,callback))
 }
@@ -93,23 +92,9 @@ if (currentdateElem) {
 }
 
 
-// adding tooltip
+// adding tooltip and defining function
 
 
-// let tooltipElems = document.querySelectorAll('[data-tooltip]');
-
-// tooltipElems.forEach(elem=>Tooltip(elem))
-
-
-// const Tooltip= function (element){
-//     let tooltip=document.createElement('span')
-
-//     tooltip.classList.add('tooltip', 'text-body-small');
-
-//     element.addEventListener('mouseenter',function(){
-//         console.log(this.dataset.tooltip);
-//     })
-// }
 
 // Define the Tooltip function
 const Tooltip = function (element) {
@@ -174,7 +159,7 @@ let showNotebookField = function () {
     navItem.classList.add('nav-item');
     navItem.innerHTML = `
         <span class="text text-label-large" data-notebook-field></span>
-        <div class="state-layer"> </div>
+        <div class="state-layer"></div>
     `;
 
     navItem.addEventListener('click', activeNotebook);
@@ -215,15 +200,184 @@ let showNotebookField = function () {
 
 addNotebookBtn.addEventListener('click', showNotebookField);
 
+// function createNotebook(event) {
+//     if (event.key === 'Enter') {
+//       let notebookData = db.post.notebook(this.textContent || 'Untitled');
+  
+//       this.parentElement.remove();
+  
+//       // Create a function to generate a notebook nav item
+//       let NavItem = function (id, name) {
+//         let navItem = document.createElement('div');
+//         navItem.classList.add('nav-item');
+//         navItem.setAttribute('data-notebook', id);
+  
+//         navItem.innerHTML = `
+//           <div class="nav-item active">
+//             <span class="text text-label-large" data-notebook-field>
+//               ${name}
+//             </span>
+//             <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
+//               <span class="material-symbols-rounded" aria-hidden="true">
+//                 Edit
+//               </span>
+//               <div class="state-layer"></div>
+//             </button>
+//             <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
+//               <span class="material-symbols-rounded" aria-hidden="true">
+//                 delete
+//               </span>
+//               <div class="state-layer"></div>
+//             </button>
+//             <div class="state-layer"></div>
+//           </div>
+//         `;
+  
+//         return navItem;
+//       };
+  
+//       let sidebarList = document.querySelector('[data-sidebar-list]');
+//       let client = {
+//         notebook: {
+//           create(notebookData) {
+//             let navItem = NavItem(notebookData.id, notebookData.name);
+//             sidebarList.appendChild(navItem);
+//           },
+//         },
+//       };
+  
+//       // Rendering nav item
+//       client.notebook.create(notebookData);
+//     }
+//   }
+  
 
-function createNotebook(event){
-    if(event.key==='Enter'){
-    
-        // store new csreated in database
 
+
+//  //   rendering nav item
+
+//  client.notebook.create(notebookData)
+
+
+function createNotebook(event) {
+    if (event.key === 'Enter') {
+      let notebookData = db.post.notebook(this.textContent || 'Untitled');
+  
+      this.parentElement.remove();
+  
+      // Create a function to generate a notebook nav item
+      let NavItem = function (id, name) {
+        let navItem = document.createElement('div');
+        navItem.classList.add('nav-item');
+        navItem.setAttribute('data-notebook', id);
+  
+        navItem.innerHTML = `
+          <div class="nav-item active">
+            <span class="text text-label-large" data-notebook-field>
+              ${name}
+            </span>
+            <button class="icon-btn-small" aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
+              <span class="material-symbols-rounded" aria-hidden="true">
+                Edit
+              </span>
+              <div class="state-layer"></div>
+            </button>
+            <button class="icon-btn-small" aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
+              <span class="material-symbols-rounded" aria-hidden="true">
+                delete
+              </span>
+              <div class="state-layer"></div>
+            </button>
+            <div class="state-layer"></div>
+          </div>
+        `;
+  
+        return navItem;
+      };
+  
+      let sidebarList = document.querySelector('[data-sidebar-list]');
+      let client = {
+        notebook: {
+          create(notebookData) {
+            let navItem = NavItem(notebookData.id, notebookData.name);
+            sidebarList.appendChild(navItem);
+          },
+        },
+      };
+  
+      // Rendering nav item
+      client.notebook.create(notebookData);
+  
+      // Set the width of the sidebarList to 90%
+      sidebarList.style.width = '100%';
+    }
+  }
+  
+
+
+// store new csreated in database
+
+let noteKeeperDB = {};
+
+let initDB= function(){
+    let db=localStorage.getItem('noteKeeperDB')
+
+    if(db){
+        noteKeeperDB=JSON.parse(db);
+    }else{
+        noteKeeperDB.notebooks=[];
+        localStorage.setItem('noteKeeperDB', JSON.stringify(noteKeeperDB))
     }
 }
 
+initDB()
+
+// reads current state
+function readDB(){
+    noteKeeperDB=JSON.parse(localStorage.getItem('noteKeeperDB'))
+}
+
+
+let writeDB=function(){
+    localStorage.setItem('noteKeeperDB',JSON.stringify(noteKeeperDB))
+}
+
+// generate id----time stamp
+
+let generateID=function(){
+    return new Date().getTime().toString()
+}
+
+
+// write current state
+/* collection of dunctions CRUD*/
+
+let db={
+    post:{
+
+        // adds new to database
+
+        notebook(name){
+            readDB()
+
+         let notebookData={
+            id:generateID(),
+            name,
+            notes:[]
+         }
+
+        noteKeeperDB.notebooks.push(notebookData); 
+
+            writeDB()
+
+            return notebookData
+        }
+
+
+
+
+    }
+}
 
 
 
