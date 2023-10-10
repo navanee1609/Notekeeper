@@ -7,12 +7,21 @@ let lastActiveNavItem;
 
 
 let activeNoteBook=function (){
-    lastActiveNavItem.classList.remove('active')
-    this.classList.add('active')   //this
+    lastActiveNavItem?.classList.remove('active')
+    this.classList.add('active')   //this navitem
     lastActiveNavItem=this
   }
 
 
+//   make dom element editable by setting contenteditable true
+
+let makeElemEditable= function(element){
+    element.setAttribute('contenteditable',true);
+    element.focus()
+}
+
+
   export{
-    activeNoteBook
+    activeNoteBook,
+    makeElemEditable
   }

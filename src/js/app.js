@@ -1,7 +1,7 @@
 // import
 
 import {Tooltip} from './components/Tooltip.js'; 
-import { activeNoteBook } from './utils.js';
+import { activeNoteBook, makeElemEditable } from './utils.js';
 
 
 // toggle sidebar in small screen
@@ -132,6 +132,31 @@ sidebarList.appendChild(navItem)
 
 let navItemField=navItem.querySelector('[data-notebook-field]')
 
+
+// active new ctreated notebook and deactivate previous
+
+activeNoteBook.call(navItem)
+
+
+// make notefield content editable
+
+makeElemEditable(navItemField)
+
+// enter button to create notebook
+
+navItemField.addEventListener('keydown',createNotebook)
+
 }
 
 addNotebookBtn.addEventListener('click',showNotebookField)
+
+
+// notebook creation
+
+let createNotebook=function(event){
+    if(event.key==='Enter'){
+       
+
+        // store it in the daTA base
+    }
+}
