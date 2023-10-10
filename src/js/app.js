@@ -1,6 +1,6 @@
 // import
 
-// import {Tooltip} from './components/Tooltip'
+import {Tooltip} from './components/Tooltip.js';
 
 
 // toggle sidebar in small screen
@@ -101,3 +101,5 @@ if (currentdateElem) {
 
 
 let tooltipElems=document.querySelectorAll('[data-tooltip]')
+
+tooltipElems.forEach(elem => Tooltip(elem))
