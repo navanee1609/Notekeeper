@@ -1,6 +1,7 @@
 // import
 
-import {Tooltip} from './components/Tooltip.js';
+import {Tooltip} from './components/Tooltip.js'; 
+import { activeNoteBook } from './utils.js';
 
 
 // toggle sidebar in small screen
@@ -102,4 +103,35 @@ if (currentdateElem) {
 
 let tooltipElems=document.querySelectorAll('[data-tooltip]')
 
-tooltipElems.forEach(elem => Tooltip(elem))
+tooltipElems.forEach(elem => Tooltip(elem));
+
+
+
+// notebook create field
+
+
+let sidebarList=document.querySelector('[data-sidebar-list]')
+
+let addNotebookBtn= document.querySelector('[data-add-notebook]')
+
+
+// shows note book creating field
+
+let showNotebookField= function (){
+    let navItem = document.createElement('div')
+
+    navItem.classList.add('nav-item')
+
+navItem.innerHTML=`
+        <span class='text text-label-large' data-notebook-field></span>
+
+        <div class='state-layer'></div>
+`;
+
+sidebarList.appendChild(navItem)
+
+let navItemField=navItem.querySelector('[data-notebook-field]')
+
+}
+
+addNotebookBtn.addEventListener('click',showNotebookField)
