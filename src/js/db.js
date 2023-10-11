@@ -1,6 +1,6 @@
 // import 
 
-import { generateID } from "./utils";
+import { generateID } from "./utils.js";
 
 
 // DB object
@@ -17,7 +17,7 @@ let initDB= function(){
     if(db){
         notekeeperDB=JSON.parse(db);
     }else{
-        notekeeperDB.nootebooks=[]
+        notekeeperDB.nootebooks=[];
         localStorage.setItem('noteKeeperDB',JSON.stringify(notekeeperDB))
     }
 
@@ -62,9 +62,13 @@ export const db={
                 notes:[]
             }
           
+
+            notekeeperDB.nootebooks.push(notebookdata)
             
 
             writeDB()
+
+            return notebookdata;
         }
     }
 }

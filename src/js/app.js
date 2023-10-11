@@ -161,6 +161,8 @@ let createNotebook=function(event){
 
         // store it in the daTA base
 
-        db.post.notebook(this.textContent || 'Untitled')     //this:navItemField
+      let notebookdata=  db.post.notebook(this.textContent || 'Untitled')     //this:navItemField
+
+      this.parentElement.remove()
     }
 }
