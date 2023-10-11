@@ -1,6 +1,6 @@
 // import 
 
-import { generateID } from "./utils.js";
+import { generateID,findNotebook } from "./utils.js";
 
 
 // DB object
@@ -79,10 +79,28 @@ export const db={
 
             return notekeeperDB.nootebooks
         }
+    },
+
+    update:{
+
+        // notebookId --- id of the notebook to update
+
+        // name --- new na,me for the notebook
+
+        //  return -- updated notebook object
+        notebook(notebookId,name){
+
+            let notebook =findNotebook(notekeeperDB,notebookId)
+
+            notebook.name=name;
+
+
+
+            writeDB()
+
+            return notebook
+        }
     }
-
-
-    // retrive all data from db
   
     
 }

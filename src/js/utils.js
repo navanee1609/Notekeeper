@@ -27,6 +27,18 @@ let generateID = function(){
 
 }
 
+let findNotebook=function(db,notebookId){
+
+  /*
+  db-- database containing object
+  notebookID-- id of notebook field
+  return--- notebook object
+
+  */
+
+  return db.notebooks.find(notebook=>notebook.id===notebookId)
+}
+
 
 
 
@@ -34,5 +46,6 @@ let generateID = function(){
   export{
     activeNoteBook,
     makeElemEditable,
-    generateID
+    generateID,
+    findNotebook
   }

@@ -2,6 +2,7 @@
 import { Tooltip } from "./Tooltip.js"
 
 import { activeNoteBook, makeElemEditable } from "../utils.js"
+import { db } from "../db.js"
 
 let notePanelTitle=document.querySelector('[data-note-panel-title]')
 
@@ -84,6 +85,11 @@ export let NavItem = function(id, name){
         }
 
         // update edited data in local storage
+
+        let updateNotebookData=db.update.notebook(id,this.textContent)
+
+
+        // render updated notebook
     })
 
 
