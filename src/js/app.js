@@ -164,5 +164,7 @@ let createNotebook=function(event){
       let notebookdata=  db.post.notebook(this.textContent || 'Untitled')     //this:navItemField
 
       this.parentElement.remove()
+
+    //   render navItem
     }
 }
