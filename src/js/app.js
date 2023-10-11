@@ -5,6 +5,8 @@ import { activeNoteBook, makeElemEditable } from './utils.js';
 
 import { db } from './db.js';
 
+import { client } from './client.js';
+
 
 // toggle sidebar in small screen
 
@@ -166,5 +168,20 @@ let createNotebook=function(event){
       this.parentElement.remove()
 
     //   render navItem
+
+    client.notebook.create(notebookdata)
+
     }
 }
+
+
+
+// renders the existing notebookk by retriving data from db
+
+const renderExistedNotebook=function(){
+    let notebookList=db.get.notebook()
+
+    client.notebook.read(notebookList)
+}
+
+renderExistedNotebook()

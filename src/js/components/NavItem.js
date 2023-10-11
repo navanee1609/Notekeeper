@@ -1,5 +1,9 @@
 // import 
 
+import { Tooltip } from "./Tooltip.js"
+
+
+
 
 /*
   creates a navigation item represents notebook ...AbortControllerit allows editiung,display notebookj name, handles click event to display its associated datas
@@ -17,7 +21,7 @@ export let NavItem = function(id, name){
 
     let navItem = document.createElement('div')
     navItem.classList.add('nav-item')
-    navItem.setAttribute(data-notebook,id)
+    navItem.setAttribute('data-notebook',id)
 
     navItem.innerHTML=`
             <span class="text text-label-large" data-notebook-field>
@@ -47,4 +51,13 @@ export let NavItem = function(id, name){
 
 
     `
+
+    // show tooltip on edit and delete button
+
+    let tooltipElems= navItem.querySelectorAll('[data-tooltip]')
+
+    tooltipElems.forEach(elem=>Tooltip(elem))
+
+
+    return navItem
 }

@@ -1,3 +1,16 @@
+import { NavItem } from "./components/NavItem.js"
+
+import { activeNoteBook } from "./utils.js";
+
+
+
+
+
+
+let sidebarList=document.querySelector('[data-sidebar-list]')
+
+let notePanelTitle=document.querySelector('[data-note-panel-title]')
+
 /* client omanages interactions with user interface to CRUD ........*/
 
 
@@ -20,8 +33,33 @@ export const client = {
 
 
        create(notebookData){
-        let navItem= NavItem()
-       }
+        let navItem= NavItem(notebookData.id,notebookData.name);
+        sidebarList.appendChild(navItem)
+        activeNoteBook.call(navItem)
+        notePanelTitle.textContent=notebookData.name
+       },
+
+// reads and display list of notebooks
+
+read(notebookList){
+    notebookList.forEach((notebookData,index) => {
+        let navItem=NavItem(notebookData.id,notebookData.name)
+
+
+        if(index===0){
+            activeNoteBook.call(navItem)
+            notePanelTitle.textContent=notebookData.name
+        }
+
+
+        sidebarList.appendChild(navItem)
+    });
+}
+
+
+
+
+
     }
 
 
