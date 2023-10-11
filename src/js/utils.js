@@ -1,3 +1,7 @@
+import {db} from "./db.js";
+
+
+
 // data note bookj field
 
 let lastActiveNavItem;
@@ -8,7 +12,7 @@ let lastActiveNavItem;
 
 let activeNoteBook=function (){
     lastActiveNavItem?.classList.remove('active')
-    this.classList.add('active')   //this navitem
+    this.classList.add('active')   //this navItem
     lastActiveNavItem=this
   }
 
@@ -41,11 +45,22 @@ let findNotebook=function(db,notebookId){
 
 
 
+// findnotebookindex
+
+
+let findNotebookIndex=function(db,notebookID){
+   return db.notebooks.findIndex(item=>item.id=== notebookID)
+
+}
+
+
+
 
 
   export{
     activeNoteBook,
     makeElemEditable,
     generateID,
-    findNotebook
+    findNotebook,
+    findNotebookIndex
   }

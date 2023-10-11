@@ -11,6 +11,8 @@ let sidebarList=document.querySelector('[data-sidebar-list]')
 
 let notePanelTitle=document.querySelector('[data-note-panel-title]')
 
+let notePanel=document.querySelector('[data-note-panel]')
+
 /* client omanages interactions with user interface to CRUD ........*/
 
 
@@ -54,7 +56,44 @@ read(notebookList){
 
         sidebarList.appendChild(navItem)
     });
+},
+
+// update
+
+
+update(notebookID,notebookData){
+    let oldNotebook=document.querySelector(`[data-notebook= "${notebookID}"`)
+
+    let newNotebook= NavItem(notebookData.id, notebookData.name)
+
+    notePanelTitle.textContent=notebookData.name;
+
+    sidebarList.replaceChild(newNotebook,oldNotebook)
+        
+        activeNoteBook.call(newNotebook)
+},
+
+
+// delete
+
+
+delete(notebookID){
+    let deletedNotebook=document.querySelector(`[data-notebook="${notebookID}"]`);
+
+    let activeNavItem=deletedNotebook.nextElementSibling ?? deletedNotebook.previousElementSibling;
+
+    if(activeNavItem){
+        activeNavItem.click()
+
+    }else{
+        notePanelTitle.innerHTML='';
+        notePanel.innerHTML=''
+    }
+    deletedNotebook.remove()
+
 }
+
+
 
 
 

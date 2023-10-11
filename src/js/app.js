@@ -1,11 +1,16 @@
 // import
-
-import {Tooltip} from './components/Tooltip.js'; 
 import { activeNoteBook, makeElemEditable } from './utils.js';
 
+import {Tooltip} from './components/Tooltip.js'; 
 import { db } from './db.js';
-
 import { client } from './client.js';
+import { NoteModal } from './components/Modal.js';
+
+
+
+
+
+
 
 
 // toggle sidebar in small screen
@@ -185,3 +190,18 @@ const renderExistedNotebook=function(){
 }
 
 renderExistedNotebook()
+
+
+/*
+// create new notebooj listening to event listener...
+when a btn is clicked opens modal foe creating new notebook
+*/
+
+
+let noteCreateBtns=document.querySelectorAll('[data-note-create-btn]')
+
+addEventOnElements(noteCreateBtns,'click',function(){
+    let modal=NoteModal()
+
+    modal.open()
+})
