@@ -1,7 +1,9 @@
 // import 
-
 import { Tooltip } from "./Tooltip.js"
 
+import { activeNoteBook, makeElemEditable } from "../utils.js"
+
+let notePanelTitle=document.querySelector('[data-note-panel-title]')
 
 
 
@@ -59,5 +61,33 @@ export let NavItem = function(id, name){
     tooltipElems.forEach(elem=>Tooltip(elem))
 
 
+
+    // handles the title update
+
+
+    navItem.addEventListener('click',function (){
+        notePanelTitle.textContent=name;
+        activeNoteBook.call(this)
+    })
+
+    // edit functionality
+
+    let navItemEditBtn=navItem.querySelector('[data-edit-btn]')
+
+    let navItemField=navItem.querySelector('[data-notebook-field]')
+
+    navItemEditBtn.addEventListener('click',makeElemEditable.bind(null,navItemField))
+
+    navItemField.addEventListener('keydown',function(event){
+        if(event.key==='Enter'){
+            this.removeAttribute('contenteditable ')
+        }
+
+        // update edited data in local storage
+    })
+
+
+
+    // notebook edit function
     return navItem
 }
