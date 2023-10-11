@@ -23,4 +23,43 @@ let initDB= function(){
 initDB()
 
 
-export const db={}
+
+// reads and loads the ls
+
+let readDB=function (){
+    notekeeperDB=JSON.parse(localStorage.getItem('noteKeeperDB'))
+}
+
+
+
+// writes current
+
+
+let writeDB= function(){
+    localStorage.setItem('noteKeeperDB',JSON.stringify(notekeeperDB))
+}
+
+
+
+// collection of function performing CRUD
+
+// db is managed uswing local variable and LS
+
+
+export const db={
+    post:{
+        notebook(name){
+            readDB()
+
+            let notebookdata={
+                id:generateID(),
+                name,
+                notes:[]
+            }
+          
+            
+
+            writeDB()
+        }
+    }
+}

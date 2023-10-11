@@ -20,8 +20,19 @@ let makeElemEditable= function(element){
     element.focus()
 }
 
+// generating id based on current timestamp
+
+let generateID = function(){
+  return new Date().getTime().toString();
+
+}
+
+
+
+
 
   export{
     activeNoteBook,
-    makeElemEditable
+    makeElemEditable,
+    generateID
   }

@@ -3,6 +3,8 @@
 import {Tooltip} from './components/Tooltip.js'; 
 import { activeNoteBook, makeElemEditable } from './utils.js';
 
+import { db } from './db.js';
+
 
 // toggle sidebar in small screen
 
@@ -155,8 +157,10 @@ addNotebookBtn.addEventListener('click',showNotebookField)
 
 let createNotebook=function(event){
     if(event.key==='Enter'){
-       
+        
 
         // store it in the daTA base
+
+        db.post.notebook(this.textContent || 'Untitled')     //this:navItemField
     }
 }
