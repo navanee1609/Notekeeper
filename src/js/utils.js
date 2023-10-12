@@ -41,8 +41,17 @@ let findNotebook= function (db, notebookId){
 }
 
 
+/*  
+db => object contsins array of objects
+notebookId => id of the notebook to find
+returnm => indec of the found notebook or -1 if not found  
+
+*/
 
 
+let findNotebookIndex= function (db,notebookId){
+  return db.notebooks.findIndex(item=> item.id===notebookId)
+}
 
 
 
@@ -52,6 +61,7 @@ let findNotebook= function (db, notebookId){
     activeNoteBook,
     makeElemEditable,
     generateID,
-    findNotebook
+    findNotebook,
+    findNotebookIndex
     
   }

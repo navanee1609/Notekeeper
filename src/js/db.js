@@ -1,6 +1,6 @@
 // import 
 
-import { generateID, findNotebook } from "./utils.js";
+import { generateID, findNotebook, findNotebookIndex } from "./utils.js";
 
 
 
@@ -71,9 +71,33 @@ export const db={
             return notebookData;
         },
 
+        note(notebookId, object){
+            readDB()
+    
+            let notebook=findNotebook(notekeeperDB,notebookId)
+    
+            let noteData={
+                id:generateID(),
+                notebookId,
+                ...object,
+                postedOn: new Date().getTime()
+            }
+    
+            console.log(noteData);
+            notebook.notes.unshift(noteData)
+            writeDB()
+    
+            return noteData
+    
+        },
+
+
       
  
     },
+
+
+  
 
     get:{
 
@@ -103,22 +127,23 @@ notebook.name=name
 
 
 
-    }
+    },
 
   
 
 
-    // delete:{
-    //     notebook(notebookId){
-    //         readDB()
+    delete:{
+        notebook(notebookId){
+            readDB()
 
-    //         let notebookIndex=findNotebookIndex(notekeeperDB,notebookId)
+           let notebookIndex= findNotebookIndex(notekeeperDB, notebookId)
 
-    //         notekeeperDB.nootebooks.splice(notebookIndex,1)
+           notekeeperDB.notebooks.splice(notebookIndex,1)
 
-    //         writeDB()
-    //     }
-    // }
+           console.log(notebookIndex);
+            writeDB()
+        }
+    }
   
     
 }

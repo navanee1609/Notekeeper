@@ -1,4 +1,5 @@
 // import { Card } from "./components/Card.js";
+import { Card } from "./components/Card.js";
 import { NavItem } from "./components/NavItem.js"
 
 import { activeNoteBook } from "./utils.js";
@@ -81,38 +82,35 @@ update(notebookId,notebookData){
 // delete
 
 
-// delete(notebookID){
-//     let deletedNotebook=document.querySelector(`[data-notebook="${notebookID}"]`);
+delete(notebookId){
+    let deletedNotebook=document.querySelector(`[data-notebook="${notebookId}"]`);
 
-//     let activeNavItem=deletedNotebook.nextElementSibling ?? deletedNotebook.previousElementSibling;
+    let activeNavItem=deletedNotebook.nextElementSibling ?? deletedNotebook.previousElementSibling;
 
-//     if(activeNavItem){
-//         activeNavItem.click()
+    if(activeNavItem){
+        activeNavItem.click()
 
-//     }else{
-//         notePanelTitle.innerHTML='';
-//         notePanel.innerHTML=''
-//     }
-//     deletedNotebook.remove()
+    }else{
+        notePanelTitle.innerHTML='';
+        notePanel.innerHTML=''
+    }
+    deletedNotebook.remove()
 
-// }
-
-
-
-
+}
 
 
 
     },
 
-    note:{
-        create(noteData){
-            let card=Card(noteData)
+ note:{
 
-            notePanel.appendChild(card)
-        }
+    // creates ui in a new note card based on provided data
+    create(noteData){
+        let card=Card(noteData)
+
+        notePanel.appendChild(card)
     }
-
+ }
 
 
 

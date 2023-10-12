@@ -3,6 +3,7 @@
 import { client } from "../client.js"
 import { db } from "../db.js"
 import { activeNoteBook,makeElemEditable } from "../utils.js"
+import { DeleteConfirmModal } from "./Modal.js"
 import { Tooltip } from "./Tooltip.js"
 
 
@@ -109,27 +110,28 @@ export let NavItem = function(id, name){
     
 
 
-    // // notebook item delete function
+    //  notebook item delete function
 
-    // let navItemdeleteBtn=navItem.querySelector('[data-delete-btn]')
+     let navItemdeleteBtn=navItem.querySelector('[data-delete-btn]')
 
-    // navItemdeleteBtn.addEventListener('click',function(){
+     
+     navItemdeleteBtn.addEventListener('click',function(){
 
 
-    //     let modal= DeleteConfirmModal(name)
+        let modal= DeleteConfirmModal(name)
 
-    //     modal.open()
+        modal.open()
 
-    //     modal.onSubmit(function(isConfirm){
-    //        if(isConfirm){
-    //         db.delete.notebook(id)
-    //         client.notebook.delete(id)
-    //        }
+        modal.onSubmit(function(isConfirm){
+            if(isConfirm){
+                db.delete.notebook(id)
+            }
 
-    //        modal.close()
-    //     })
+            modal.close()
+            client.notebook.delete(id)
+        })
        
-    // })
+    })
 
 
 

@@ -4,6 +4,7 @@ import { activeNoteBook, makeElemEditable } from './utils.js';
 import {Tooltip} from './components/Tooltip.js'; 
 import { db } from './db.js';
 import { client } from './client.js';
+import { NoteModal } from './components/Modal.js';
 
 
  
@@ -189,3 +190,30 @@ let renderExistedNotebook= function(){
 }  
 renderExistedNotebook()
 
+
+
+
+// create new note
+
+ let noteCreateBtns= document.querySelectorAll('[data-note-create-btn]')
+
+
+
+ addEventOnElements(noteCreateBtns, 'click', function(){
+    let modal = NoteModal();
+
+    modal.open()
+
+
+    // handles submission 
+
+    modal.onSubmit(noteObj=> {
+        let activeNoteBookId= document.querySelector('[data-notebook].active').dataset.notebook;
+
+       let noteData= db.post.note(activeNoteBookId, noteObj)
+
+       client.note.create(noteData)
+
+       modal.close()
+    })
+ })
