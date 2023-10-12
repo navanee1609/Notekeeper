@@ -107,7 +107,16 @@ export const db={
 
 
             return notekeeperDB.notebooks
+        },
+
+        note(notebookId){
+            readDB()
+
+            let notebook= findNotebook(notekeeperDB,notebookId)
+
+           return notebook.notes 
         }
+
     },
 
     update:{
@@ -123,6 +132,15 @@ notebook.name=name
             writeDB()
 
             return notebook
+        },
+
+        note(noteId, object){
+            readDB()
+
+            let oldNote= findNote(notekeeperDB, noteId)
+            let newNote= Object.assign(oldNote, object)
+
+            writeDB()
         }
 
 

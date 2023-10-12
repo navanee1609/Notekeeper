@@ -992,6 +992,7 @@ body{
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  flex-grow: 1;
   align-content: flex-start;
   align-items: stretch;
   gap: var(--spacing-2);

@@ -75,6 +75,9 @@ export let NavItem = function(id, name){
     navItem.addEventListener('click',function (){
         notePanelTitle.textContent=name;
         activeNoteBook.call(this)
+
+        let noteList = db.get.note(this.dataset.notebook)   // this refers to navitem
+        client.note.read(noteList)
     })
 
     // // edit functionality

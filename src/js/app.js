@@ -217,3 +217,17 @@ renderExistedNotebook()
        modal.close()
     })
  })
+
+//  renderas existing notebooks in the active notebook and retrives from data base
+
+
+let renderExistedNote= function (){
+    let activeNoteBookId= document.querySelector('[data-notebook].active')?.dataset.notebook;
+
+    if(activeNoteBookId){
+     let noteList = db.get.note(activeNoteBookId)
+     client.note.read(noteList)   
+    }
+}
+
+renderExistedNote()
