@@ -1,6 +1,7 @@
 // import 
 
-import { generateID,findNotebook,findNotebookIndex } from "./utils.js";
+import { generateID, findNotebook } from "./utils.js";
+
 
 
 // DB object
@@ -17,7 +18,7 @@ let initDB= function(){
     if(db){
         notekeeperDB=JSON.parse(db);
     }else{
-        notekeeperDB.nootebooks=[];
+        notekeeperDB.notebooks=[];
         localStorage.setItem('noteKeeperDB',JSON.stringify(notekeeperDB))
     }
 
@@ -56,66 +57,68 @@ export const db={
         notebook(name){
             readDB()
 
-            let notebookdata={
+            let notebookData={
                 id:generateID(),
                 name,
                 notes:[]
             }
           
-
-            notekeeperDB.nootebooks.push(notebookdata)
+            notekeeperDB.notebooks.push(notebookData)
             
 
             writeDB()
 
-            return notebookdata;
-        }
+            return notebookData;
+        },
+
+      
+ 
     },
 
     get:{
+
+        // retrives all notebook from db
         notebook(){
-            readDB();
+            readDB()
 
 
-            return notekeeperDB.nootebooks
+            return notekeeperDB.notebooks
         }
     },
 
     update:{
 
-        // notebookId --- id of the notebook to update
-
-        // name --- new na,me for the notebook
-
-        //  return -- updated notebook object
+        /*  notebookId ->id to update*/
         notebook(notebookId,name){
-
             readDB()
+let notebook= findNotebook(notekeeperDB, notebookId)
 
-            let notebook =findNotebook(notekeeperDB,notebookId)
-
-            // notebook.name=name
-
+notebook.name=name
 
 
             writeDB()
 
             return notebook
         }
-    },
 
 
-    delete:{
-        notebook(notebookId){
-            readDB()
 
-            let notebookIndex=findNotebookIndex(notekeeperDB,notebookId)
-
-            notekeeperDB.nootebooks.splice(notebookIndex,1)
-
-            writeDB()
-        }
     }
+
+  
+
+
+    // delete:{
+    //     notebook(notebookId){
+    //         readDB()
+
+    //         let notebookIndex=findNotebookIndex(notekeeperDB,notebookId)
+
+    //         notekeeperDB.nootebooks.splice(notebookIndex,1)
+
+    //         writeDB()
+    //     }
+    // }
   
     
 }

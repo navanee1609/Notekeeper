@@ -1,14 +1,16 @@
-// import 
+// import
+
+import { client } from "../client.js"
+import { db } from "../db.js"
+import { activeNoteBook,makeElemEditable } from "../utils.js"
 import { Tooltip } from "./Tooltip.js"
 
-import { activeNoteBook, makeElemEditable } from "../utils.js"
-import { db } from "../db.js"
-import { client } from "../client.js"
-import { DeleteConfirmModal } from "./Modal.js"
+
+
 
 
 let notePanelTitle=document.querySelector('[data-note-panel-title]')
-
+Tooltip
 
 
 /*
@@ -29,7 +31,7 @@ export let NavItem = function(id, name){
     navItem.classList.add('nav-item')
     navItem.setAttribute('data-notebook',id)
 
-    navItem.innerHTML=`
+    navItem.innerHTML= `
             <span class="text text-label-large" data-notebook-field>
             ${name}
         </span>
@@ -58,7 +60,7 @@ export let NavItem = function(id, name){
 
     `
 
-    // show tooltip on edit and delete button
+    // // show tooltip on edit and delete button
 
     let tooltipElems= navItem.querySelectorAll('[data-tooltip]')
 
@@ -66,7 +68,7 @@ export let NavItem = function(id, name){
 
 
 
-    // handles the title update
+    // // handles the title update
 
 
     navItem.addEventListener('click',function (){
@@ -74,51 +76,60 @@ export let NavItem = function(id, name){
         activeNoteBook.call(this)
     })
 
-    // edit functionality
+    // // edit functionality
 
-    let navItemEditBtn=navItem.querySelector('[data-edit-btn]')
+     let navItemEditBtn=navItem.querySelector('[data-edit-btn]')
 
-    let navItemField=navItem.querySelector('[data-notebook-field]')
+     let navItemField=navItem.querySelector('[data-notebook-field]')
 
-    navItemEditBtn.addEventListener('click',makeElemEditable.bind(null,navItemField))
+     navItemEditBtn.addEventListener('click',makeElemEditable.bind(null,navItemField))
 
-    navItemField.addEventListener('keydown',function(event){
-        if(event.key==='Enter'){
-            this.removeAttribute('contenteditable ')
+    navItemField.addEventListener('keydown', function (event){
+        if (event.key==='Enter'){
+            this.removeAttribute('contenteditable');
+
+            // update edited data in db
+
+            let updatedNotebookData= db.update.notebook(id, this.textContent)
+
+                 
+
+         // render updated notebook
+
+         client.notebook.update(id,updatedNotebookData) 
+
+          
         }
-
-        // update edited data in local storage
-
-        // let updateNotebookData=db.update.notebook(id,this.textContent)
-
-
-        // render updated notebook
-
-        client.notebook.update(id,updateNotebookData); 
     })
 
-
-    // nav item delete function
-
-    let navItemdeleteBtn=navItem.querySelector('[data-delete-btn]')
-
-    navItemdeleteBtn.addEventListener('click',function(){
+  
 
 
-        let modal= DeleteConfirmModal(name)
+   
+    
 
-        modal.open()
 
-        modal.onSubmit(function(isConfirm){
-           if(isConfirm){
-            db.delete.notebook(id)
-            client.notebook.delete(id)
-           }
+    // // notebook item delete function
 
-           modal.close()
-        })
+    // let navItemdeleteBtn=navItem.querySelector('[data-delete-btn]')
+
+    // navItemdeleteBtn.addEventListener('click',function(){
+
+
+    //     let modal= DeleteConfirmModal(name)
+
+    //     modal.open()
+
+    //     modal.onSubmit(function(isConfirm){
+    //        if(isConfirm){
+    //         db.delete.notebook(id)
+    //         client.notebook.delete(id)
+    //        }
+
+    //        modal.close()
+    //     })
        
-    })
+    // })
 
 
 

@@ -1,8 +1,6 @@
-import {db} from "./db.js";
 
 
-
-// data note bookj field
+// data note book field
 
 let lastActiveNavItem;
 
@@ -25,33 +23,26 @@ let makeElemEditable= function(element){
 }
 
 // generating id based on current timestamp
-
+ 
 let generateID = function(){
   return new Date().getTime().toString();
 
 }
 
-let findNotebook=function(db,notebookId){
 
-  /*
-  db-- database containing object
-  notebookID-- id of notebook field
-  return--- notebook object
+/*  db => database,
+    notebookId=> id of notebook ton find
+    object | undefined => found or not found
 
-  */
+    */
 
-  return db.notebooks.find(notebook=>notebook.id===notebookId)
+let findNotebook= function (db, notebookId){
+  return db.notebooks.find(notebook =>notebook.id === notebookId)
 }
 
 
 
-// findnotebookindex
 
-
-let findNotebookIndex=function(db,notebookID){
-   return db.notebooks.findIndex(item=>item.id=== notebookID)
-
-}
 
 
 
@@ -61,6 +52,6 @@ let findNotebookIndex=function(db,notebookID){
     activeNoteBook,
     makeElemEditable,
     generateID,
-    findNotebook,
-    findNotebookIndex
+    findNotebook
+    
   }

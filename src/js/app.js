@@ -4,9 +4,9 @@ import { activeNoteBook, makeElemEditable } from './utils.js';
 import {Tooltip} from './components/Tooltip.js'; 
 import { db } from './db.js';
 import { client } from './client.js';
-import { NoteModal } from './components/Modal.js';
 
 
+ 
 
 
 
@@ -147,7 +147,7 @@ let navItemField=navItem.querySelector('[data-notebook-field]')
 activeNoteBook.call(navItem)
 
 
-// make notefield content editable
+// make notefield content editable and focus
 
 makeElemEditable(navItemField)
 
@@ -162,46 +162,30 @@ addNotebookBtn.addEventListener('click',showNotebookField)
 
 // notebook creation
 
-let createNotebook=function(event){
+let createNotebook=function (event){
     if(event.key==='Enter'){
-        
+         // store new created notebook in database
 
-        // store it in the daTA base
+   let notebookData=db.post.notebook(this.textContent || 'Untitled')
 
-      let notebookdata=  db.post.notebook(this.textContent || 'Untitled')     //this:navItemField
+   this.parentElement.remove()
 
-      this.parentElement.remove()
+//    Render navitem
 
-    //   render navItem
 
-    client.notebook.create(notebookdata)
-
+client.notebook.create(notebookData)
     }
+    
 }
 
 
 
-// renders the existing notebookk by retriving data from db
+// render all existing notebook by retriving data
 
-const renderExistedNotebook=function(){
-    let notebookList=db.get.notebook()
+let renderExistedNotebook= function(){
+    let notebookList=db.get.notebook();
 
-    client.notebook.read(notebookList)
-}
-
+    client.notebook.read(notebookList);
+}  
 renderExistedNotebook()
 
-
-/*
-// create new notebooj listening to event listener...
-when a btn is clicked opens modal foe creating new notebook
-*/
-
-
-let noteCreateBtns=document.querySelectorAll('[data-note-create-btn]')
-
-addEventOnElements(noteCreateBtns,'click',function(){
-    let modal=NoteModal()
-
-    modal.open()
-})

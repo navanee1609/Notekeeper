@@ -1,6 +1,8 @@
+// import { Card } from "./components/Card.js";
 import { NavItem } from "./components/NavItem.js"
 
 import { activeNoteBook } from "./utils.js";
+
 
 
 
@@ -13,7 +15,7 @@ let notePanelTitle=document.querySelector('[data-note-panel-title]')
 
 let notePanel=document.querySelector('[data-note-panel]')
 
-/* client omanages interactions with user interface to CRUD ........*/
+/* client manages interactions with user interface to CRUD ........*/
 
 
 /*
@@ -34,35 +36,37 @@ export const client = {
        /* @param {object} notebookData -- represents new notebook*/
 
 
-       create(notebookData){
-        let navItem= NavItem(notebookData.id,notebookData.name);
+      create(notebookData){
+        let navItem=NavItem(notebookData.id, notebookData.name);
         sidebarList.appendChild(navItem)
         activeNoteBook.call(navItem)
         notePanelTitle.textContent=notebookData.name
-       },
 
+      },
 // reads and display list of notebooks
 
 read(notebookList){
-    notebookList.forEach((notebookData,index) => {
-        let navItem=NavItem(notebookData.id,notebookData.name)
+    notebookList.forEach((notebookData , index) => {
+        let navItem= NavItem(notebookData.id, notebookData.name)
 
+      if(index===0){
+        activeNoteBook.call(navItem)
+        notePanelTitle.textContent=notebookData.name
+      }
+      
 
-        if(index===0){
-            activeNoteBook.call(navItem)
-            notePanelTitle.textContent=notebookData.name
-        }
+      sidebarList.appendChild(navItem)
 
-
-        sidebarList.appendChild(navItem)
+        
     });
 },
+
 
 // update
 
 
-update(notebookID,notebookData){
-    let oldNotebook=document.querySelector(`[data-notebook= "${notebookID}"`)
+update(notebookId,notebookData){
+    let oldNotebook=document.querySelector(`[data-notebook= "${notebookId}"`)
 
     let newNotebook= NavItem(notebookData.id, notebookData.name)
 
@@ -77,28 +81,36 @@ update(notebookID,notebookData){
 // delete
 
 
-delete(notebookID){
-    let deletedNotebook=document.querySelector(`[data-notebook="${notebookID}"]`);
+// delete(notebookID){
+//     let deletedNotebook=document.querySelector(`[data-notebook="${notebookID}"]`);
 
-    let activeNavItem=deletedNotebook.nextElementSibling ?? deletedNotebook.previousElementSibling;
+//     let activeNavItem=deletedNotebook.nextElementSibling ?? deletedNotebook.previousElementSibling;
 
-    if(activeNavItem){
-        activeNavItem.click()
+//     if(activeNavItem){
+//         activeNavItem.click()
 
-    }else{
-        notePanelTitle.innerHTML='';
-        notePanel.innerHTML=''
-    }
-    deletedNotebook.remove()
+//     }else{
+//         notePanelTitle.innerHTML='';
+//         notePanel.innerHTML=''
+//     }
+//     deletedNotebook.remove()
 
-}
-
-
+// }
 
 
 
 
 
+
+
+    },
+
+    note:{
+        create(noteData){
+            let card=Card(noteData)
+
+            notePanel.appendChild(card)
+        }
     }
 
 
