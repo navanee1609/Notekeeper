@@ -19,10 +19,13 @@ let notePanel=document.querySelector('[data-note-panel]')
 let noteCreateBtns= document.querySelectorAll('[data-note-create-btn]')
 
 let emptyNotesTemplate = `
-        
+
+ <div class="empty-notes">
 <span class="material-symbols-rounded" aria-hidden="true">note_stack</span>
 
 <div class="text-headline-small">No notes</div>
+</div> 
+        
 `
 
 
@@ -131,7 +134,7 @@ delete(notebookId){
         if (!notePanel.querySelector('[data-note]')) notePanel.innerHTML='';
         let card=Card(noteData)
 
-        notePanel.appendChild(card)
+        notePanel.prepend(card)
     },
 
 
@@ -140,8 +143,8 @@ delete(notebookId){
     if(noteList.length){
         notePanel.innerHTML='';
 
-        noteList.forEach(notedata=>{
-            let card=Card(notedata);
+        noteList.forEach(noteData=>{
+            let card=Card(noteData);
             notePanel.appendChild(card)
         })
     }else{
@@ -154,7 +157,12 @@ delete(notebookId){
 
     let newcard= Card(noteData);
     notePanel.replaceChild(newcard, oldCard)
-   }
+   },
+//    delete(noteId,isNoteExists){
+//     document.querySelector(`[data-note="${noteId}"]`).remove();
+
+//     if(!isNoteExists) notePanel.innerHTML= emptyNotesTemplate
+//    }
  }
 
 

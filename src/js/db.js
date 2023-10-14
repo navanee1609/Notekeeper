@@ -1,6 +1,6 @@
 // import 
 
-import { generateID, findNotebook, findNotebookIndex } from "./utils.js";
+import { generateID, findNotebook, findNotebookIndex, findNote, findNoteIndex} from "./utils.js";
 
 
 
@@ -16,6 +16,7 @@ let initDB= function(){
 
 
     if(db){
+        
         notekeeperDB=JSON.parse(db);
     }else{
         notekeeperDB.notebooks=[];
@@ -141,6 +142,8 @@ notebook.name=name
             let newNote= Object.assign(oldNote, object)
 
             writeDB()
+
+            return newNote
         }
 
 
@@ -160,6 +163,18 @@ notebook.name=name
 
            console.log(notebookIndex);
             writeDB()
+        },
+
+        note(notebookId, noteId){
+            readDB()
+            let notebook =  findNotebook(notekeeperDB,notebookId)
+
+            let noteIndex= findNoteIndex(notebook,noteId)
+
+            notebook.notes.splice(noteIndex,10)
+
+            writeDB()
+            return notebook.notes
         }
     }
   

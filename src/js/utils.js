@@ -88,12 +88,19 @@ let findNote= (db, noteId)=>{
 }
 
 
+
+let findNoteIndex= function (notebook, noteId){
+  return notebook.notes.findIndex(note=>note.id===noteId)
+}
+
   export{
     activeNoteBook,
     makeElemEditable,
     generateID,
     findNotebook,
     findNotebookIndex,
-    getRelativeTime
+    getRelativeTime,
+    findNote,
+    findNoteIndex 
     
   }
