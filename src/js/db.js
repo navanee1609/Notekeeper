@@ -171,7 +171,7 @@ notebook.name=name
 
             let noteIndex= findNoteIndex(notebook,noteId)
 
-            notebook.notes.splice(noteIndex,10)
+            notebook.notes.splice(noteIndex,1 )
 
             writeDB()
             return notebook.notes

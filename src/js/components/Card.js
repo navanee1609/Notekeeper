@@ -82,8 +82,8 @@ export const Card= function(noteData){
              if(isConfirm){
                  let existedNotes = db.delete.note(notebookId,id)
 
-                 client.note.delete(id,existedNotes.length)
-             }
+                client.note.delete(id,existedNotes.length)
+             };
 
             modal.close()
         })

@@ -158,11 +158,11 @@ delete(notebookId){
     let newcard= Card(noteData);
     notePanel.replaceChild(newcard, oldCard)
    },
-//    delete(noteId,isNoteExists){
-//     document.querySelector(`[data-note="${noteId}"]`).remove();
+   delete(noteId,isNoteExists){
+    document.querySelector(`[data-note="${noteId}"]`).remove();
 
-//     if(!isNoteExists) notePanel.innerHTML= emptyNotesTemplate
-//    }
+    if(!isNoteExists) notePanel.innerHTML= emptyNotesTemplate
+   }
  }
 
 

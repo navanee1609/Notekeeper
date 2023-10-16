@@ -70,9 +70,9 @@ let getRelativeTime=function(milliseconds){
   let currentTime= new Date().getTime();
   let minute= Math.floor((currentTime - milliseconds) / 1000 / 60);
 
-  let hour = Math.floor(minute / 60)
+  let hour = Math.floor(minute / 60);
 
-  let day=Math.floor(hour / 24)
+  let day=Math.floor(hour / 24);
 
   return minute < 1 ? 'Just now' : minute < 60 ? `${minute} min ago` : hour <24 ? `{hour} hour ago`: `${day} day ago`
 }
@@ -81,16 +81,16 @@ let findNote= (db, noteId)=>{
   let note;
 
   for(let notebook of db.notebooks){
-    note=notebook.notes.find(note=> note.id ===noteId)
-    if(note)  break
+    note=notebook.notes.find(note=> note.id === noteId)
+    if(note) break
   }
-  return note
+  return note;
 }
 
 
 
 let findNoteIndex= function (notebook, noteId){
-  return notebook.notes.findIndex(note=>note.id===noteId)
+  return notebook.notes.findIndex(note => note.id===noteId)
 }
 
   export{
