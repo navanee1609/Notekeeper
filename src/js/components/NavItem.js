@@ -37,7 +37,7 @@ export let NavItem = function(id, name){
             ${name}
         </span>
 
-        <button class="icon-btn-small"  aria-label="Edit notebook" data-tooltip="Edit notebook" data-edit-btn>
+        <button class="icon-btn-small"  aria-label="Edit notebook" data-tooltip="Edit" data-edit-btn>
                     <span class="material-symbols-rounded" aria-hidden="true">
                         Edit
                     </span>
@@ -46,7 +46,7 @@ export let NavItem = function(id, name){
                     <div class="state-layer"></div>
 
         </button>
-        <button class="icon-btn-small"  aria-label="Delete notebook" data-tooltip="Delete notebook" data-delete-btn>
+        <button class="icon-btn-small"  aria-label="Delete notebook" data-tooltip="Delete" data-delete-btn>
                     <span class="material-symbols-rounded" aria-hidden="true">
                         delete
                     </span>
