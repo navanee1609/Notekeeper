@@ -67,5 +67,5 @@ License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 
-![NoteKeeper img](https://github.com/navanee1609/Notekeeper/assets/120004894/fc579b42-c0d7-4db8-8a51-c756848a8ccb)
+![NoteKeeper img](https://github.com/navanee1609/Notekeeper/assets/120004894/f918259f-9ee7-4b79-a54b-0367e5d46d9e)
 
